@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/pngwing.com.png</file>
+        <file>imagenes/fondo.jpeg</file>
+    </qresource>
+</RCC>
