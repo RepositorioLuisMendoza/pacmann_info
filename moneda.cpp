@@ -15,7 +15,7 @@ QRectF moneda::boundingRect() const
 
 void moneda::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
+    painter->setBrush(Qt::red);
     painter->drawEllipse(boundingRect());
 
 }

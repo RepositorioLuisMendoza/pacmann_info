@@ -12,6 +12,7 @@ SOURCES += \
     cuerpo.cpp \
     database.cpp \
     enemy.cpp \
+    ganaste.cpp \
     juego.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     cuerpo.h \
     database.h \
     enemy.h \
+    ganaste.h \
     juego.h \
     mainwindow.h \
     moneda.h \
@@ -30,6 +32,7 @@ HEADERS += \
     puntaje.h
 
 FORMS += \
+    ganaste.ui \
     mainwindow.ui
 
 # Default rules for deployment.

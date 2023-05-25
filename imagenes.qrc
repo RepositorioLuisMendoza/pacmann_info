@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>imagenes/pngwing.com.png</file>
         <file>imagenes/fondo.jpeg</file>
+        <file>imagenes/y2mate.com - SONIDO DE PAC MAN.mp3</file>
     </qresource>
 </RCC>

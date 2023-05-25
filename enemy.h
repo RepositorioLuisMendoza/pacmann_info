@@ -1,33 +1,32 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <QGraphicsItem>
-#include <QPainter>
 #include <QGraphicsPixmapItem>
-#include <QTimer>
 #include <QObject>
 
-class enemy: public QObject, public QGraphicsItem
+class QTimer;
+
+class enemy : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 
-    int r;
-    int velocidad = 5;
-
 public:
     enemy(int r_, int x, int y);
-    int posx, posy;
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+
+public slots:
     void up();
     void down();
     void left();
     void right();
+
 private:
+    int r;
+    int posx, posy;
     QPixmap *imagen, *actuali;
     QTimer *time;
-    short cambio,muerto;
-
+    short cambio, muerto;
+    void select_sprite_enemy(int x, int y);
+    void actualiza_sprite_enemy(short dir);
 };
 
 #endif // ENEMY_H

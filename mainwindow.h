@@ -12,12 +12,8 @@
 #include <QImage>
 #include <QTimer>
 
-#include "cuerpo.h"
-#include "enemy.h"
-#include "pared.h"
-#include "moneda.h"
-#include "puntaje.h"
-#include "database.h"
+#include "juego.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,27 +32,21 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    juego *scene;
+    QTimer *timer;
+
     cuerpo *personaje;
     enemy *enemigo;
 
     QList<moneda *> monedas;
     QList <pared*> paredes;
 
-    QGraphicsScene *scene;
-    QTimer *timer;
 //juego *game;
 
-    void keyPressEvent(QKeyEvent * evento);
-    QList<moneda *> eliminarMonedas(QList<moneda *> monedas,int pos);
-    void crear_pared(int, int, int ancho, int alto);
-    void crear_monedas (int, int, int ancho, int alto);
-
-    void paredes_ ();
-    void monedas_();
 
 
 public slots:
-    void moveEnemy();
+
 
 
 };
