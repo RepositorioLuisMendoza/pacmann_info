@@ -40,7 +40,7 @@ protected:
 
 private:
     cuerpo *personaje;
-    enemy *enemigo;
+    enemy *enemigo,*enemigo2,*enemigo3,*enemigo4;
     QLabel *puntajeLabel;
     int incremento_;
 

@@ -14,8 +14,15 @@ juego::juego()
 
     enemigo = new enemy(10,120,180); // se crea fantasma
     //enemigo->setPos(400,0);
+    enemigo2=new enemy(10, 150, 130);
+    enemigo3=new enemy(10, 120, 400);
+    enemigo4=new enemy(10,120,580);
+
 
     addItem(enemigo);
+    addItem(enemigo2);
+    addItem(enemigo3);
+    addItem(enemigo4);
 
     paredes_();
     monedas_();
@@ -39,6 +46,27 @@ void juego::keyPressEvent(QKeyEvent *evento)
 {
 
     if (personaje->collidesWithItem(enemigo))
+    {
+        //personaje->muerte_personaje();
+        //removeItem(personaje);
+        personaje->perdiste();
+        //personaje->ganaste();
+    }
+    if (personaje->collidesWithItem(enemigo2))
+    {
+        //personaje->muerte_personaje();
+        //removeItem(personaje);
+        personaje->perdiste();
+        //personaje->ganaste();
+    }
+    if (personaje->collidesWithItem(enemigo3))
+    {
+        //personaje->muerte_personaje();
+        //removeItem(personaje);
+        personaje->perdiste();
+        //personaje->ganaste();
+    }
+    if (personaje->collidesWithItem(enemigo4))
     {
         //personaje->muerte_personaje();
         //removeItem(personaje);
@@ -388,40 +416,9 @@ void juego::monedas_()
 
 void juego::moveEnemy()
 {
-    enemigo->up();
+    if (enemigo->x>=650)
+    {enemigo->up();}
 
-        for (int i = 0;i < paredes.size();i++)
-        {
-            if(enemigo->collidesWithItem(paredes.at(i)))
-            {
-                enemigo->down();
-            }
-        }
-
-        for (int i = 0;i < paredes.size();i++) {
-             if(enemigo->collidesWithItem(paredes.at(i))){
-                enemigo->up();
-             }
-        }
-
-        for (int i = 0;i < paredes.size();i++) {
-             if(enemigo->collidesWithItem(paredes.at(i))){
-                enemigo->up();
-             }
-        }
-
-        for (int i = 0;i < paredes.size();i++) {
-             if(enemigo->collidesWithItem(paredes.at(i))){
-                enemigo->up();
-             }
-        }
-
-
-        for (int i = 0;i < paredes.size();i++) {
-             if(enemigo->collidesWithItem(paredes.at(i))){
-                enemigo->up();
-             }
-        }
 
 }
 
