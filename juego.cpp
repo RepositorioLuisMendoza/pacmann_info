@@ -7,6 +7,7 @@ juego::juego()
     r.load(":/imagenes/fondo.jpeg");
     l.setTextureImage(r);
     setBackgroundBrush(l);
+    cuenta=0;
 
     enemigo = new enemy(10,120,180); // se crea fantasma
     //enemigo->setPos(400,0);
@@ -24,16 +25,23 @@ juego::juego()
     timer = new QTimer();
     //connect(timer,SIGNAL(timeout()),this,SLOT(moveEnemy()));
     timer->start(5);
+    //personaje->ganaste();
+    //timer->stop();
+
 
 }
 
 void juego::keyPressEvent(QKeyEvent *evento)
 {
+
     if (personaje->collidesWithItem(enemigo))
     {
-        personaje->muerte_personaje();
-
+        //personaje->muerte_personaje();
+        //removeItem(personaje);
+        //personaje->perdiste();
+        personaje->ganaste();
     }
+
     if(evento->key()==Qt::Key_D){
 
         if (personaje->getPosx() >= 695 && personaje->getPosy() == 306){
@@ -42,13 +50,25 @@ void juego::keyPressEvent(QKeyEvent *evento)
          //Evaluacion de colision con monedas
          if (personaje->getPosx() <= 7 && personaje->getPosx() == 306){
              personaje->setPos(695,306);
+
+
+
          }
          personaje->Move_derecha();
         for (int i = 0;i < monedas.size();i++) {
             if(personaje->collidesWithItem(monedas.at(i))){
-                 //puntaje_->incremento(); // incremento de puntaje
+                 //puntaje->aumentar_puntaje(); // incremento de puntaje
+                 //timer->stop();
+
+
+
                  removeItem(monedas.at(i));
                  monedas.removeAt(i);
+                 cuenta+=1;
+                 if (cuenta>=110)
+                 {
+                    // personaje->ganaste();
+                 }
                  i--;
                  }
          }
@@ -56,6 +76,10 @@ void juego::keyPressEvent(QKeyEvent *evento)
         for (int i = 0;i < paredes.size();i++) {
              if(personaje->collidesWithItem(paredes.at(i))){
                 personaje->Move_izquierda();
+
+
+
+
                  //personaje->setPos(pos);
 
              }
@@ -69,6 +93,11 @@ void juego::keyPressEvent(QKeyEvent *evento)
                  // puntaje_->incremento(); // incremento de puntaje
                  removeItem(monedas.at(i));
                  monedas.removeAt(i);
+                 cuenta+=1;
+                 if (cuenta>=110)
+                 {
+                    // personaje->ganaste();
+                 }
                  i--;
                  }
          }
@@ -76,6 +105,7 @@ void juego::keyPressEvent(QKeyEvent *evento)
         for (int i = 0;i < paredes.size();i++) {
              if(personaje->collidesWithItem(paredes.at(i))){
                  personaje->Move_arriba();
+                 //personaje->ganaste();
              }
         }
     }
@@ -87,6 +117,12 @@ void juego::keyPressEvent(QKeyEvent *evento)
                  // puntaje_->incremento(); // incremento de puntaje
                  removeItem(monedas.at(i)); // eliminar moneda de esena
                  monedas.removeAt(i);
+                 cuenta+=1;
+                 if (cuenta>=110)
+                 {
+                    // personaje->ganaste();
+                 }
+
                  i--;
                  }
         }
@@ -108,6 +144,11 @@ void juego::keyPressEvent(QKeyEvent *evento)
                 // puntaje_->incremento(); // incremento de puntaje
                  removeItem(monedas.at(i)); // eliminar moneda de esena
                  monedas.removeAt(i);
+                 cuenta+=1;
+                 if (cuenta>=110)
+                 {
+                    // personaje->ganaste();
+                 }
                  i--;
                 }
             }
@@ -120,6 +161,7 @@ void juego::keyPressEvent(QKeyEvent *evento)
      }
 }
 
+
 QList<moneda *> juego::eliminarMonedas(QList<moneda *> monedas, int pos)
 {
     QList<moneda *> aux;
@@ -129,7 +171,15 @@ QList<moneda *> juego::eliminarMonedas(QList<moneda *> monedas, int pos)
         }
     }
     return aux;
+    if (monedas.isEmpty())
+    {
+        personaje->ganaste();
+        timer->stop();
+    }
 }
+
+
+
 
 void juego::crear_pared(int x, int y, int ancho, int alto)
 {
@@ -324,63 +374,45 @@ void juego::monedas_()
     crear_monedas(531,642,10,10);
     crear_monedas(580,642,10,10);
     crear_monedas(644,642,10,10);
+
 }
 
 void juego::moveEnemy()
 {
-//    if(enemigo->x() < personaje->x()){
-//        enemigo->right();
+    enemigo->up();
 
-//        for (int i = 0;i < paredes.size();i++) {
-//             if(enemigo->collidesWithItem(paredes.at(i))){
-//                enemigo->left();
-//             }
-//        }
-//    }
+        for (int i = 0;i < paredes.size();i++)
+        {
+            if(enemigo->collidesWithItem(paredes.at(i)))
+            {
+                enemigo->down();
+            }
+        }
 
-//    else if(enemigo->x() > personaje->x()){
-//        enemigo->left();
+        for (int i = 0;i < paredes.size();i++) {
+             if(enemigo->collidesWithItem(paredes.at(i))){
+                enemigo->up();
+             }
+        }
 
-//        for (int i = 0;i < paredes.size();i++) {
-//             if(enemigo->collidesWithItem(paredes.at(i))){
-//                enemigo->right();
-//             }
-//        }
-//    }
+        for (int i = 0;i < paredes.size();i++) {
+             if(enemigo->collidesWithItem(paredes.at(i))){
+                enemigo->up();
+             }
+        }
 
-//    else if(enemigo->y() < personaje->y()){
-//            enemigo->down();
-//        for (int i = 0;i < paredes.size();i++) {
-//             if(enemigo->collidesWithItem(paredes.at(i))){
-//                enemigo->up();
-//             }
-//        }
-//    }
-//    else if(enemigo->y() > personaje->y()){
-//        enemigo->up();
-//        for (int i = 0;i < paredes.size();i++) {
-//             if(enemigo->collidesWithItem(paredes.at(i))){
-//                enemigo->down();
-//             }
-//        }
-//    }
+        for (int i = 0;i < paredes.size();i++) {
+             if(enemigo->collidesWithItem(paredes.at(i))){
+                enemigo->up();
+             }
+        }
 
-//    else if(enemigo->y() < personaje->y()){
-//        enemigo->down();
-//        for (int i = 0;i < paredes.size();i++) {
-//             if(enemigo->collidesWithItem(paredes.at(i))){
-//                enemigo->down();
-//             }
-//        }
-//    }
 
-//enemigo->setPos(enemigo->posx,enemigo->posy);
-//if (enemigo->collidesWithItem(personaje))
-//{
-//  personaje->muerte_personaje();
-//  scene->removeItem(personaje);
-//  timer->stop();
-//}
+        for (int i = 0;i < paredes.size();i++) {
+             if(enemigo->collidesWithItem(paredes.at(i))){
+                enemigo->up();
+             }
+        }
 
 }
 

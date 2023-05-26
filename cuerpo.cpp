@@ -27,12 +27,15 @@ cuerpo ::cuerpo(int r_, int x, int y)
     posx = x;
     posy = y;
     setPos(posx,posy);
+
     complete = new QPixmap(":/imagenes/pngwing.com.png");
     image = 0;
     muerte = 0;
     nuevo = complete->copy(170, 0, 24*1, 24*11);
     *complete = complete->copy(415, 0, 24 * 1, 24 * 12);
     setPos(150, 76);
+    ganador= new QPixmap(":/imagenes/143bb54804da15cc3a12b9a5be4d48b9.png");
+    perdedor= new QPixmap(":/imagenes/BMO - Game over.png");
     actual = new QPixmap;
     time = new QTimer;
     //connect(time, SIGNAL(timeout()), this, SLOT(actualiza_sprite()));
@@ -64,6 +67,7 @@ void cuerpo::Move_arriba()
     posy -= 1*velocidad;
     setPos(posx, posy);
     actualiza_sprite(3);
+
 }
 
 void cuerpo::Move_abajo()
@@ -121,4 +125,18 @@ void cuerpo::muerte_personaje()
         muerte++;
     }
     muerte=0;
+
+
+}
+
+void cuerpo::ganaste()
+{
+    setPixmap(*ganador);
+    setPos(0,0);
+}
+
+void cuerpo::perdiste()
+{
+    setPixmap(*perdedor);
+    setPos(0,0);
 }

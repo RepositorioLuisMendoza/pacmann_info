@@ -31,6 +31,7 @@ public:
     void juego_();
     void paredes_ ();
     void monedas_();
+    int cuenta;
 
 protected:
     void keyPressEvent(QKeyEvent *evento);
@@ -38,6 +39,7 @@ protected:
 private:
     cuerpo *personaje;
     enemy *enemigo;
+    puntaje *puntaje;
 
     QList<moneda *> monedas;
     QList <pared*> paredes;
