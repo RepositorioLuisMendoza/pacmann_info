@@ -7,6 +7,9 @@ juego::juego()
     r.load(":/imagenes/fondo.jpeg");
     l.setTextureImage(r);
     setBackgroundBrush(l);
+    incremento_ = 0;
+
+
     cuenta=0;
 
     enemigo = new enemy(10,120,180); // se crea fantasma
@@ -27,6 +30,7 @@ juego::juego()
     timer->start(5);
     //personaje->ganaste();
     //timer->stop();
+    //personaje->perdiste();
 
 
 }
@@ -38,11 +42,19 @@ void juego::keyPressEvent(QKeyEvent *evento)
     {
         //personaje->muerte_personaje();
         //removeItem(personaje);
-        //personaje->perdiste();
-        personaje->ganaste();
+        personaje->perdiste();
+        //personaje->ganaste();
     }
 
+
     if(evento->key()==Qt::Key_D){
+        if (personaje->collidesWithItem(enemigo))
+        {
+            //personaje->muerte_personaje();
+            //removeItem(personaje);
+            personaje->perdiste();
+            //personaje->ganaste();
+        }
 
         if (personaje->getPosx() >= 695 && personaje->getPosy() == 306){
             personaje->setPosx(4);
@@ -59,16 +71,13 @@ void juego::keyPressEvent(QKeyEvent *evento)
             if(personaje->collidesWithItem(monedas.at(i))){
                  //puntaje->aumentar_puntaje(); // incremento de puntaje
                  //timer->stop();
-
-
+                cuenta+=1;
+                if (cuenta>=120)
+                {personaje->ganaste();}
 
                  removeItem(monedas.at(i));
                  monedas.removeAt(i);
-                 cuenta+=1;
-                 if (cuenta>=110)
-                 {
-                    // personaje->ganaste();
-                 }
+
                  i--;
                  }
          }
@@ -94,9 +103,9 @@ void juego::keyPressEvent(QKeyEvent *evento)
                  removeItem(monedas.at(i));
                  monedas.removeAt(i);
                  cuenta+=1;
-                 if (cuenta>=110)
+                 if (cuenta>=120)
                  {
-                    // personaje->ganaste();
+                     personaje->ganaste();
                  }
                  i--;
                  }
@@ -118,9 +127,9 @@ void juego::keyPressEvent(QKeyEvent *evento)
                  removeItem(monedas.at(i)); // eliminar moneda de esena
                  monedas.removeAt(i);
                  cuenta+=1;
-                 if (cuenta>=110)
+                 if (cuenta>=120)
                  {
-                    // personaje->ganaste();
+                     personaje->ganaste();
                  }
 
                  i--;
@@ -145,9 +154,9 @@ void juego::keyPressEvent(QKeyEvent *evento)
                  removeItem(monedas.at(i)); // eliminar moneda de esena
                  monedas.removeAt(i);
                  cuenta+=1;
-                 if (cuenta>=110)
+                 if (cuenta>=120)
                  {
-                    // personaje->ganaste();
+                     personaje->ganaste();
                  }
                  i--;
                 }

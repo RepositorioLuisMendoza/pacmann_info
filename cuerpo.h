@@ -1,9 +1,9 @@
 #ifndef CUERPO_H
 #define CUERPO_H
+
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QObject>
-
 
 class cuerpo : public QObject, public QGraphicsPixmapItem
 {
@@ -11,7 +11,6 @@ class cuerpo : public QObject, public QGraphicsPixmapItem
     int r;
     int posx, posy;
     int velocidad = 5;
-
 
 public:
     cuerpo(int r_, int x, int y);
@@ -24,7 +23,7 @@ public:
     void Move_derecha();
     void Move_izquierda();
     void muerte_personaje();
-    void verifificacion_(cuerpo& cuerpo);
+    void verificacion(cuerpo* cuerpo);
 
     int getPosx() const;
     void setPosx(int newPosx);
@@ -33,11 +32,17 @@ public:
     void setPosy(int newPosy);
 
 private:
-    QPixmap *complete, *actual, nuevo, *ganador,*perdedor;
+    QPixmap *complete;
+    QPixmap *actual;
+    QPixmap nuevo;
+    QPixmap *ganador;
+    QPixmap *perdedor;
     QTimer *time;
-    short image,muerte;
+    short image;
+    short muerte;
     int ANCHO_ESCENA;
-    void actualiza_sprite(short dir);
 
+    void actualiza_sprite(short dir);
 };
+
 #endif // CUERPO_H

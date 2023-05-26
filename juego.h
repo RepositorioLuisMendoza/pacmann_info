@@ -14,6 +14,7 @@
 #include <QGraphicsPixmapItem>
 #include <QImage>
 #include <QTimer>
+#include <QLabel>
 
 #include "cuerpo.h"
 #include "enemy.h"
@@ -28,6 +29,7 @@ class juego : public QGraphicsScene
 {
 public:
     juego();
+    void aumentar_puntaje();
     void juego_();
     void paredes_ ();
     void monedas_();
@@ -39,7 +41,8 @@ protected:
 private:
     cuerpo *personaje;
     enemy *enemigo;
-    puntaje *puntaje;
+    QLabel *puntajeLabel;
+    int incremento_;
 
     QList<moneda *> monedas;
     QList <pared*> paredes;
